@@ -1,0 +1,28 @@
+.auth__button-save {
+  margin: 186px auto 0;
+  padding: 0;
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  background: rgba(255, 255, 255, 1) none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color .3s ease-in;
+}
+
+.auth__button-save:hover {
+  background-color: rgba(255,255,255,0.85);
+}
+
+@media screen and (max-width: 800px) {
+  .auth__button-save {
+    margin-top: 173px;
+    min-height: 46px;
+    font-size: 16px;
+  }
+}
+

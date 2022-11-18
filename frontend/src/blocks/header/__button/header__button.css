@@ -1,0 +1,22 @@
+.header__button {
+  margin: 0 0 0 24px;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(255,255,255,1);
+  transition: color .3s ease-in;
+  text-decoration: none;
+  font-size: 18px;
+  align-self: center;
+}
+
+.header__button:hover {
+  color: rgba(255,255,255,0.6);
+}
+
+@media screen and (max-width: 700px) {
+  .header__button {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+}

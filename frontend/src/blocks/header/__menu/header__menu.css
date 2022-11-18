@@ -1,0 +1,10 @@
+.header__menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 700px) {
+  .header__menu {
+    margin: 27px 30px 0 0;
+  }
+}
