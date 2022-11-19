@@ -1,9 +1,0 @@
-.header__button_auth {
-  margin-left: 24px;
-}
-
-@media screen and (max-width: 700px) {
-  .header__button_auth {
-    font-size: 22px;
-  }
-}
