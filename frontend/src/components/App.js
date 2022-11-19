@@ -36,15 +36,15 @@ function App() {
   const [iconTooltip, setIconTooltip] = useState('');
   const [headerStatus, setHeaderStatus] = useState(false);
 
-  const onError = err => console.log(`Ошибка: ${err}`);
+  const onError = err => console.log(err);
 
   useEffect(() => {
-    api.getAppInfo()
-      .then(([userInfo, cards]) => {
-        setCurrentUser(userInfo);
-        setCards(cards);
-      })
-      .catch(err => onError(err));
+      api.getAppInfo()
+        .then(([userInfo, cards]) => {
+          setCurrentUser(userInfo);
+          setCards(cards);
+        })
+        .catch(err => onError(err));
     checkToken();
   }, [])
 
@@ -60,7 +60,7 @@ function App() {
           history.push('/sign-in');
         }
       })
-      .then(() => setTimeout(handleLogin, 300, password, email))
+      .then(() => setTimeout(handleLogin, 3000, password, email))
       .catch(err => {
         onError(err);
         setIconTooltip(failIcon);
@@ -106,9 +106,9 @@ function App() {
   };
 
   const handleCardLike = card => {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
-      .then(newCard => setCards((state) => state.map((c) => c._id === card._id ? newCard : c)))
+      .then(newCard => setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c)))
       .catch(err => onError(err));
   };
 
@@ -166,10 +166,10 @@ function App() {
 
   function checkToken() {
     if (localStorage.getItem('token')) {
-      //const jwt = localStorage.getItem('token');
-      mestoAuth.check()
+      const jwt = localStorage.getItem('token');
+      mestoAuth.check(jwt)
         .then((res) => {
-          setEmail(res.data.email);
+          setEmail(res.email);
           setLoggedIn(true);
           history.push('/');
         })

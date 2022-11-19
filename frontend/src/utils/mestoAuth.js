@@ -1,4 +1,4 @@
-import {jwt, serverUrl} from "./constants";
+import { serverUrl} from "./constants";
 
 export const register = (password, email) => {
   return fetch(`${serverUrl}/signup`, {
@@ -38,12 +38,12 @@ export const login = (password, email) => {
   })
 }
 
-export const check = () => {
+export const check = (jwt) => {
   return fetch(`${serverUrl}/users/me`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : jwt
+      "Authorization" : `Bearer ${jwt}`
     }
   })
   .then((res) => {

@@ -4,9 +4,9 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Card({ card, onCardClick, onCardLike, onConfirm }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
+  const isLiked = card.likes.some(i => i === currentUser._id);
   const cardDeleteButtonClassName = `element__delete ${isOwn ? 'element__delete_active' : ''}`;
-  const isLiked = card.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonClassName = `element__button-like ${isLiked ? 'element__button-like_active' : ''}`;
 
   const handleCardClick = () => onCardClick(card);
@@ -23,7 +23,7 @@ function Card({ card, onCardClick, onCardLike, onConfirm }) {
           <p className="element__like-counter">{card.likes.length}</p>
         </div>
       </div>
-      <button type="button"  className={cardDeleteButtonClassName} onClick={handleConfirmClick}></button>
+      <button type="button" className={cardDeleteButtonClassName} onClick={handleConfirmClick}></button>
     </li>
   )
 }
