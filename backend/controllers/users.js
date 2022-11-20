@@ -4,7 +4,8 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
-const UnauthorizedError = require('../errors/UnauthorizedError');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const {
   ERROR_TEXT_NOT_FOUND_USERS,
@@ -123,10 +124,10 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, secretKey, { expiresIn: '1d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : secretKey, { expiresIn: '1d' });
       res.send({ token });
     })
-    .catch(() => next(new UnauthorizedError('Неправильная почта или пароль')));
+    .catch(next);
 };
 
 module.exports.getMe = (req, res, next) => {

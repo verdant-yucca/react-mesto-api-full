@@ -122,7 +122,7 @@ function App() {
   const handleAddPlaceSubmit = (name, info) => {
     setIsLoading(true);
     api.addCard(name, info)
-      .then(newCard => setCards([newCard, ...cards]))
+      .then(({ data }) => setCards([data, ...cards]))
       .catch(err => onError(err))
       .finally(() => {
         setIsLoading(false);

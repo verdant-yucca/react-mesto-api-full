@@ -1,7 +1,7 @@
 const allowedCors = [
   'https://verdant-yucca-front.nomoredomains.icu',
   'http://verdant-yucca-front.nomoredomains.icu',
-  'localhost:3000'
+  'localhost:3000',
 ];
 
 const cors = (req, res, next) => {
@@ -19,7 +19,7 @@ const cors = (req, res, next) => {
     res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
-  return next()
-}
+  return next();
+};
 
 module.exports = cors;
